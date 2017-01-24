@@ -2,8 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Table</title>
+    <title>Phone</title>
+    <style>
+        #card {
+            background: darkseagreen;
+            width: 200px;
+            text-align: center;
+            height: 300px;
+            padding: 50px 0;
+            margin: 0 auto;
+        }
+    </style>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script>
         //alert('start');
         var socket = io.connect("http://192.168.0.104:81");
@@ -14,16 +28,37 @@
         //alert('connected');
 
 
-        function doAction() {
-            socket.emit('phone-action', {
-                message: 'Hello from the phone!'
+        $(document).ready(function () {
+            $('#card').offset({top: 100});
+            var initPos = $('#card').offset().top;
+            var diff = 0;
+            $('#card').draggable({
+                //revert: true,
+                axis: "y",
+                drag: function () {
+                    diff = initPos - $('#card').offset().top;
+                },
+                stop: function () {
+                    if (diff > 50) {
+                        doAction();
+                    }
+                }
             });
+        })
+
+        function doAction() {
+            $('#card').animate({top: -1000}, function () {
+                $(this).remove();
+            });
+            socket.emit('phone-action');
         }
 
 
     </script>
 </head>
 <body>
-<button type="button" onclick="doAction()">do action</button>
+
+<div id="card">Card</div>
+
 </body>
 </html>

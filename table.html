@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Table</title>
+    <style>
+        .card-wrapper {
+            width: 100%;
+            position: absolute;
+            top: 10000px;
+        }
+
+        #card {
+            background: darkseagreen;
+            width: 200px;
+            text-align: center;
+            height: 300px;
+            padding: 50px 0;
+            margin: 0 auto;
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
     <script>
         var socket = io.connect("http://192.168.0.104:81");
 
@@ -11,13 +29,17 @@
         socket.emit('table-connect');
 
         socket.on('phone-action', function (cardData) {
-            alert(cardData.message);
+            $('.card-wrapper').animate({top: 100});
         });
 
     </script>
 </head>
 <body>
 
-123
+<div class="card-wrapper">
+    <div id="card">Card</div>
+</div>
+
+
 </body>
 </html>
