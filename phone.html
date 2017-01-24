@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <script>
+        //alert('start');
+        var socket = io.connect("http://192.168.0.104:81");
+        //alert('socket created');
+
+        // register card table socket right after the connection is established
+        socket.emit('phone-connect');
+        //alert('connected');
+
+
+        function doAction() {
+            socket.emit('phone-action', {
+                message: 'Hello from the phone!'
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+<button type="button" onclick="doAction()">do action</button>
+</body>
+</html>

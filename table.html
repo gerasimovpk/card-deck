@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
+    <script>
+        var socket = io.connect("http://192.168.0.104:81");
+
+        // register card table socket right after the connection is established
+        socket.emit('table-connect');
+
+        socket.on('phone-action', function (cardData) {
+            alert(cardData.message);
+        });
+
+    </script>
+</head>
+<body>
+
+123
+</body>
+</html>

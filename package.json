@@ -1,0 +1,24 @@
+{
+  "name": "card-deck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gerasimovpk/card-deck.git"
+  },
+  "author": "Pavel Gerasimov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gerasimovpk/card-deck/issues"
+  },
+  "homepage": "https://github.com/gerasimovpk/card-deck#readme",
+  "dependencies": {
+    "connect": "^3.5.0",
+    "serve-static": "^1.11.2",
+    "socket.io": "^1.7.2"
+  }
+}
