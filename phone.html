@@ -29,6 +29,7 @@
 
 
         $(document).ready(function () {
+            $("#card").html(window.orientation);
             $('#card').offset({top: 100});
             var initPos = $('#card').offset().top;
             var diff = 0;
@@ -44,13 +45,39 @@
                     }
                 }
             });
+
+
+
+            function orientationhandler(evt){
+                //$("#card").html((event.acceleration.x * 2).toFixed(2) + " / " + (event.acceleration.y * 2).toFixed(2));
+            }
+            window.addEventListener('devicemotion',  orientationhandler, false);
+
+
+
+            window.currentDirection = 0;
+            function deviceOrientationHandler(e) {
+                var a = e.alpha; // from left to right in horizontal
+                var b = e.beta;
+                var g = e.gamma;
+                //$("#card").html(a + " / " + b + " / " + g);
+                window.currentDirection = a;
+            }
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', deviceOrientationHandler);
+                //alert('We will try');
+            }else{
+                //alert('Device orientation not supported in this browser.');
+            }
         })
 
         function doAction() {
             $('#card').animate({top: -1000}, function () {
                 $(this).remove();
             });
-            socket.emit('phone-action');
+            socket.emit('phone-action', {
+                direction: window.currentDirection
+            });
         }
 
 

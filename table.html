@@ -17,6 +17,7 @@
             height: 300px;
             padding: 50px 0;
             margin: 0 auto;
+            transition: all 0.1s;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
@@ -30,6 +31,7 @@
 
         socket.on('phone-action', function (cardData) {
             $('.card-wrapper').animate({top: 100});
+            $("#card").css("transform", "rotate(-" + cardData.direction + "deg)");
         });
 
     </script>
