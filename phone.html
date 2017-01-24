@@ -28,8 +28,8 @@
         //alert('connected');
 
 
-        $(document).ready(function () {
-            $("#card").html(window.orientation);
+        function initCard() {
+            $("<div id='card'>Card</div>").appendTo("body");
             $('#card').offset({top: 100});
             var initPos = $('#card').offset().top;
             var diff = 0;
@@ -45,7 +45,11 @@
                     }
                 }
             });
+        }
 
+        $(document).ready(function () {
+
+            initCard();
 
 
             function orientationhandler(evt){
@@ -74,6 +78,7 @@
         function doAction() {
             $('#card').animate({top: -1000}, function () {
                 $(this).remove();
+                initCard();
             });
             socket.emit('phone-action', {
                 direction: window.currentDirection
@@ -84,8 +89,6 @@
     </script>
 </head>
 <body>
-
-<div id="card">Card</div>
 
 </body>
 </html>

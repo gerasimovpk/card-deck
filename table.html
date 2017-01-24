@@ -10,7 +10,7 @@
             top: 10000px;
         }
 
-        #card {
+        .card {
             background: darkseagreen;
             width: 200px;
             text-align: center;
@@ -18,6 +18,7 @@
             padding: 50px 0;
             margin: 0 auto;
             transition: all 0.1s;
+            border: 1px solid red;
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.js"></script>
@@ -30,17 +31,16 @@
         socket.emit('table-connect');
 
         socket.on('phone-action', function (cardData) {
-            $('.card-wrapper').animate({top: 100});
-            $("#card").css("transform", "rotate(-" + cardData.direction + "deg)");
+            var wrapper = $('<div class="card-wrapper"><div class="card">Card</div></div>').appendTo("body");
+            wrapper .animate({top: 100});
+            wrapper.find(".card").css("transform", "rotate(-" + cardData.direction + "deg)");
         });
 
     </script>
 </head>
 <body>
 
-<div class="card-wrapper">
-    <div id="card">Card</div>
-</div>
+
 
 
 </body>
